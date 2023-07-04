@@ -10,7 +10,7 @@ const gravity = 0.7
 
 // ---- Sprite Class ----
 class Sprite {
-    constructor({position, velocity}) {
+    constructor({position, velocity, color = 'red'}) {
         this.position = position
         this.velocity = velocity
         this.height = 150
@@ -20,14 +20,15 @@ class Sprite {
             width: 100, 
             height: 50,
         }
+        this.color = color
     }
     draw() {
         // player box
-        c.fillStyle = "red"
+        c.fillStyle = this.color
         c.fillRect(this.position.x, this.position.y, 50, this.height)
 
         // attache box
-        c.fillStyle = "green"
+        c.fillStyle = 'green'
         c.fillRect(
             this.attackBox.position.x, 
             this.attackBox.position.y, 
@@ -57,7 +58,8 @@ const player1 = new Sprite({
     velocity: {
         x: 0,
         y: 0
-    }
+    },
+    color: 'red'
 })
 
 
@@ -70,7 +72,8 @@ const player2 = new Sprite({
     velocity: {
         x: 0,
         y: 0
-    }
+    },
+    color: 'blue'
 })
 
 // -- Hold value for Key press. Default is false -- 

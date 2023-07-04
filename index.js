@@ -1,6 +1,5 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
-console.log(canvas, c);
 canvas.width = 1024
 canvas.height = 576
 
@@ -18,8 +17,9 @@ class Sprite {
     }
     update() {
         this.draw()
+        // this.position.y += 10
         this.position.y += 10
-    }
+    } 
 }
 
 // ---- Player 1 ----
@@ -46,16 +46,14 @@ const player2 = new Sprite({
         y: 0
     }
 })
-
-
-console.log(player1);
-console.log(player2);
+// player1.draw()
+// player2.draw()
 
 function animate(){
     window.requestAnimationFrame(animate)
-    // c.fillStyle = 'black'
-    // c.fillRect(0, 0, canvas.width, canvas.height)
-    // c.clearRect(0, 0, canvas.width, canvas.height)
+    c.fillStyle = 'black'
+    c.fillRect(0,0, canvas.width, canvas.width )
     player1.update()
     player2.update()
 }
+animate()

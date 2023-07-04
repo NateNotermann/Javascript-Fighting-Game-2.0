@@ -13,8 +13,8 @@ npm install foobar
 ```
 
 ## List of Todo items
-Project Setup
-Create Player and Enemy
+Project Setup - DONE
+Create Player and Enemy - DONE
 Move Characters with event listeners
 Attacks
 Health Bar Interface

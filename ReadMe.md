@@ -20,6 +20,8 @@ Attacks
 Health Bar Interface
 Game Timers and Game Over
 
+EXTRA:
+Add sliders to change jump & damage amount & time
 
 ## Contributing
 

@@ -14,6 +14,7 @@ class Sprite {
         this.position = position
         this.velocity = velocity
         this.height = 150
+        this.width = 50
         this.lastKey
         this.attackBox = {
             position: this.position ,
@@ -135,6 +136,15 @@ function animate(){
     // } else if (keys.d.pressed && lastKey === 'd') {
     //     player1.velocity.x = 1 
     // } 
+
+    // -- Detect for collision --
+    // If player1's position + it's width >= player2's position 
+        // AND <= player2's position + player2's width
+    if (player1.attackBox.position.x + player1.attackBox.width >= player2.position.x
+        && player1.attackBox.position.x <= player2.position.x + player2.width
+        ) {
+        console.log('collision');
+    }
 }
 animate()
 

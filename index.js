@@ -20,6 +20,7 @@ class Sprite {
     }
     update() {
         this.draw()
+        this.position.x += this.velocity.x
         this.position.y += this.velocity.y
         // this.position.y += 10
         
@@ -55,14 +56,69 @@ const player2 = new Sprite({
         y: 0
     }
 })
-// player1.draw()
-// player2.draw()
 
+// -- Hold value for Key press. Default is false -- 
+const keys = {
+    a: {
+        pressed: false
+    },
+    d: {
+        pressed: false
+    }
+}
+
+let lastKey
+
+// ---- Main Animate function ---- //
 function animate(){
     window.requestAnimationFrame(animate)
     c.fillStyle = 'black'
     c.fillRect(0,0, canvas.width, canvas.width )
     player1.update()
     player2.update()
+
+    player1.velocity.x = 0
+
+    if (keys.a.pressed && keys.d.pressed) {
+        player1.velocity.x = 0
+    } else if (keys.d.pressed) {
+        player1.velocity.x = 1 
+    } else if (keys.a.pressed) {
+        player1.velocity.x = -1
+    }
+    
+    // if (keys.a.pressed && lastKey === 'a') {
+    //     player1.velocity.x = -1
+    // } else if (keys.d.pressed && lastKey === 'd') {
+    //     player1.velocity.x = 1 
+    // } 
 }
 animate()
+
+// -- Listen for key press  --
+window.addEventListener('keydown', (event) => {
+    switch (event.key) {
+        case 'd':
+            keys.d.pressed = true
+            lastKey = 'd'
+            break
+        case 'a':
+            keys.a.pressed = true
+            lastKey = 'a'
+            break
+        
+    }
+    console.log(event.key) //, event.keyCode);
+})
+
+window.addEventListener('keyup', (event) => {
+    switch (event.key) {
+        case 'd':
+            keys.d.pressed = false
+            break
+        case 'a':
+            keys.a.pressed = false
+            break
+    }
+    console.log(event.key, event.keyCode);
+})

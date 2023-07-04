@@ -5,6 +5,8 @@ canvas.height = 576
 
 c.fillRect(0, 0, canvas.width, canvas.height)
 
+const gravity = 0.2
+
 // ---- Sprite Class ----
 class Sprite {
     constructor({position, velocity}) {
@@ -20,10 +22,12 @@ class Sprite {
         this.draw()
         this.position.y += this.velocity.y
         // this.position.y += 10
-
+        
+        // --  This is what stops player from falling through the floor -- 
         if (this.position.y + this.height + this.velocity.y >= canvas.height ) {
-            this.velocity.y = 0 
-        }
+            this.velocity.y = 0  // make this negative to make objects bounce // 
+        } else 
+        this.velocity.y += gravity
     } 
 }
 
@@ -35,7 +39,7 @@ const player1 = new Sprite({
     },
     velocity: {
         x: 0,
-        y: 10
+        y: 0
     }
 })
 
@@ -48,7 +52,7 @@ const player2 = new Sprite({
     },
     velocity: {
         x: 0,
-        y: 10
+        y: 0
     }
 })
 // player1.draw()

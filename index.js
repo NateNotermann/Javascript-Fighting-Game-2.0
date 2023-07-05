@@ -1,7 +1,7 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
-canvas.width = 1024
-canvas.height = 576
+canvas.width = 1024  //visualViewport.width - 10
+canvas.height = 576  //visualViewport.height - 10
 
 c.fillRect(0, 0, canvas.width, canvas.height)
 
@@ -146,7 +146,7 @@ function rectangularCollision( { rectangle1, rectangle2 }) {
 function animate(){
     window.requestAnimationFrame(animate)
     c.fillStyle = 'black'
-    c.fillRect(0,0, canvas.width, canvas.width )
+    c.fillRect(0,0, canvas.width, canvas.height )
     player1.update()
     player2.update()
 

@@ -13,12 +13,37 @@
         <!-- <link rel="stylesheet" href=""> -->
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]--> 
+        
+        <!---- red container div FUll view ---->
+        <div style="position: relative; display: inline-block; border-style: solid; border-width: 5px; border-color: red;" > 
+            <!---- smaller red container div at top ---->
+            <div style="position: absolute; display: flex; width: 100%; border-style: solid; border-width: 5px; border-color: purple;">
+                <!-- Player1 Health -->
+                <div style="background-color: yellow; height: 30px; width: 100%;"></div>
+                
+                <!-- Timer -->
+                <div style="background-color: red; height: 100px; width: 100px;"></div>
+                
+                
+                
+                
+                <!-- <div style="
+                    background-color: yellow; 
+                    height: 30px; 
+                    width: 100%;
+                    flex-shrink: 0;
+                    border-style: solid; 
+                    border-radius: 5px;  
+                    border-color: white;
+                    " ></div> -->
+                    
+                    
+                    <!-- Player2 Health -->
+                    <div style="background-color: yellow; height: 30px; width: 100%"></div>
+                </div>
+                <canvas></canvas>
+            </div>
+            
         <script src="index.js" async defer></script>
-
-            <canvas></canvas>
-
     </body>
 </html>

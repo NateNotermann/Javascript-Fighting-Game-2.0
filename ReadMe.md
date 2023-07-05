@@ -4,7 +4,7 @@ Test project to make a 2D fighting game in .
 
 ## Contributing
 
-This app was made using a YouTube tutorial by Chris Course. [GitHub](https://github.com/chriscourses)
+This app was made using a YouTube tutorial by Chris Course. [GitHub](https://github.com/chriscourses)     
 [Tutorial](https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses).
 
 

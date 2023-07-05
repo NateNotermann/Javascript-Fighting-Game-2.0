@@ -11,38 +11,55 @@
         <meta name="description" content="This is a sample description of my webpage.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- <link rel="stylesheet" href=""> -->
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+        </style>
     </head>
     <body>
         
         <!---- red container div FUll view ---->
         <div style="position: relative; display: inline-block; border-style: solid; border-width: 5px; border-color: red;" > 
+            
             <!---- smaller red container div at top ---->
-            <div style="position: absolute; display: flex; width: 100%; border-style: solid; border-width: 5px; border-color: purple;">
+            <div style="position: absolute; 
+            display: flex; 
+            align-items: center; 
+            width: 100%; 
+            padding: 20px;
+            border-style: solid; 
+            border-width: 5px; 
+            border-color: purple;">
+
+
                 <!-- Player1 Health -->
-                <div style="background-color: yellow; height: 30px; width: 100%;"></div>
+                <div style="position: relative; display: flex; justify-content: flex-end; height: 30px; width: 100%; border-style: solid; border-width: 2px; border-color: white;" >
+                    <div style="background-color: yellow; height: 30px; width: 100%;"></div>
+                    <div id="player1Health" 
+                    style="position: absolute; background-color: blue; top: 0; bottom: 0; right: 0; 
+                    width: 100%; "></div>
+                </div>  
                 
                 <!-- Timer -->
-                <div style="background-color: red; height: 100px; width: 100px;"></div>
+                <div style="background-color: red; 
+                height: 100px; 
+                width: 100px; 
+                flex-shrink: 0;
+                "></div>
                 
+                <!-- Player2 Health -->
+                <div style="position: relative; height: 30px; width: 100%; border-style: solid; border-width: 2px; border-color: white;" >
+                    <div style="background-color: yellow; height: 30px;"></div>
+                    <div id="player2Health" style="position: absolute; background-color: blue; top: 0; bottom: 0; right: 0; left: 0; "></div>
+                </div>  
                 
-                
-                
-                <!-- <div style="
-                    background-color: yellow; 
-                    height: 30px; 
-                    width: 100%;
-                    flex-shrink: 0;
-                    border-style: solid; 
-                    border-radius: 5px;  
-                    border-color: white;
-                    " ></div> -->
-                    
-                    
-                    <!-- Player2 Health -->
-                    <div style="background-color: yellow; height: 30px; width: 100%"></div>
-                </div>
-                <canvas></canvas>
+
             </div>
+
+            <canvas></canvas>
+
+        </div>
             
         <script src="index.js" async defer></script>
     </body>

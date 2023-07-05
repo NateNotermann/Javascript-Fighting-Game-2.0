@@ -14,7 +14,7 @@ Project Setup - DONE
 Create Player and Enemy - DONE   
 Move Characters with event listeners - DONE    
 Attacks - DONE    
-Health Bar Interface   
+Health Bar Interface - DONE    
 Game Timers and Game Over   
 
 EXTRA:   

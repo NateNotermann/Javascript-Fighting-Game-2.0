@@ -35,15 +35,15 @@ class Sprite {
         c.fillStyle = this.color
         c.fillRect(this.position.x, this.position.y, 50, this.height)
 
-        // attache box
-        // if (this.isAttacking) {
+        // attack box
+        if (this.isAttacking) {
             c.fillStyle = 'green'
             c.fillRect(
                 this.attackBox.position.x, 
                 this.attackBox.position.y, 
                 this.attackBox.width, 
                 this.attackBox.height)
-        // }
+        }
     }
     update() {
         this.draw()
@@ -62,7 +62,7 @@ class Sprite {
         this.isAttacking = true
         setTimeout(() => {
             this.isAttacking = false
-        }, 10) // timeout in milliseconds
+        }, 100) // timeout in milliseconds
 
     }
 }
@@ -202,7 +202,7 @@ if (
     && player1.isAttacking
     ) {
         player1.isAttacking = false
-        console.log('go');
+        console.log('player 1 attack!');
     }
 
 
@@ -222,7 +222,7 @@ animate()
 
 // -- Listen for key press  --
 window.addEventListener('keydown', (event) => {
-    console.log(event.key) //, event.keyCode);
+    // console.log(event.key) //, event.keyCode);
     switch (event.key) {
     // ---- Player 1 ----
         case 'd':
@@ -253,7 +253,7 @@ window.addEventListener('keydown', (event) => {
             player2.velocity.y = -20 
             break
         case 'Control':
-            player2.isAttacking = true
+            player2.attack()
             break
     }
 })

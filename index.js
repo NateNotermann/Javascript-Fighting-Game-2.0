@@ -30,12 +30,14 @@ class Sprite {
         c.fillRect(this.position.x, this.position.y, 50, this.height)
 
         // attache box
-        c.fillStyle = 'green'
-        c.fillRect(
-            this.attackBox.position.x, 
-            this.attackBox.position.y, 
-            this.attackBox.width, 
-            this.attackBox.height)
+        if (this.isAttacking) {
+            c.fillStyle = 'green'
+            c.fillRect(
+                this.attackBox.position.x, 
+                this.attackBox.position.y, 
+                this.attackBox.width, 
+                this.attackBox.height)
+        }
     }
     update() {
         this.draw()
@@ -53,7 +55,7 @@ class Sprite {
         this.isAttacking = true
         setTimeout(() => {
             this.isAttacking = false
-        }, 100) // timeout in milliseconds
+        }, 10) // timeout in milliseconds
 
     }
 }
@@ -156,7 +158,9 @@ function animate(){
         && player1.attackBox.position.y <= player2.position.y + player2.height
         && player1.isAttacking
         ) {
-        console.log('go') 
+
+        player1.isAttacking = false // stop attacking
+        console.log('attack') 
     }
 }
 animate()

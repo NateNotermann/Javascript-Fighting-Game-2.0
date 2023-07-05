@@ -101,7 +101,7 @@ const keys = {
         pressed: false
     }
 }
-
+let x = 0
 // ---- Main Animate function ---- //
 function animate(){
     window.requestAnimationFrame(animate)
@@ -138,19 +138,23 @@ function animate(){
     // } 
 
     // -- Detect for collision --
-    // If player1's position + it's width >= player2's position 
-        // AND <= player2's position + player2's width
+    // If (p1.A-box.pos + p1 width) >= p2.pos
     if (player1.attackBox.position.x + player1.attackBox.width >= player2.position.x
-        && player1.attackBox.position.x <= player2.position.x + player2.width
+        // AND <= p1.A-box.pos.X <= (p2.pos.X + p2.width)
+        && player1.attackBox.position.x <= player2.position.x + player2.width 
+        // AND (p1.A-box.pos.Y + p1.A-box.height) >= p2.pos.Y
+        && player1.attackBox.position.y + player1.attackBox.height >= player2.position.y
+        // AND p2.A-box.pos.Y <= (p2.pos.y + p2.heigh)
+        && player1.attackBox.position.y <= player2.position.y + player2.height
         ) {
-        console.log('collision');
+        console.log('collision ', x += 1);
     }
 }
 animate()
 
 // -- Listen for key press  --
 window.addEventListener('keydown', (event) => {
-    console.log(event.key) //, event.keyCode);
+    // console.log(event.key) //, event.keyCode);
     switch (event.key) {
         // -- Player 1 --
         case 'd':
@@ -199,5 +203,4 @@ window.addEventListener('keyup', (event) => {
             keys.ArrowLeft.pressed = false
             break
     }
-    console.log(event.key, event.keyCode);
 })

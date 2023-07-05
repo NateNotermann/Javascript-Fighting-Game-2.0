@@ -15,7 +15,28 @@ Create Player and Enemy - DONE
 Move Characters with event listeners - DONE    
 Attacks - DONE    
 Health Bar Interface - DONE    
-Game Timers and Game Over   
+Game Timers and Game Over (In Progress)  
+
+### List of Todo items  
+Design character art
+Make character animation frames
+Add character animation art
+
+Design background
+Make background animation frames
+Add background animation art
+
+Add Xbox Controller API/Code created by CodingWith-Adam     
+    [GitHub](https://github.com/CodingWith-Adam/gamepad-api-simple-game)   
+    [Main Tutorial](https://www.youtube.com/watch?v=GOjMP6WY8CU&ab_channel=CodingWithAdam)    
+    [GamePad Tester](www.google.com) (to be coded)   
+    [GamePad Game](www.google.com) (to be coded) 
+
+
+Add Music
+Add menus etc.
+
+Deploy to site
 
 EXTRA:   
 Add sliders to change jump & damage amount & time

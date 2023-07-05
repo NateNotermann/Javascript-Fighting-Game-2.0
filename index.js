@@ -22,6 +22,7 @@ class Sprite {
             height: 50,
         }
         this.color = color
+        this.isAttacking
     }
     draw() {
         // player box
@@ -48,6 +49,13 @@ class Sprite {
         } else 
         this.velocity.y += gravity
     } 
+    attack() {
+        this.isAttacking = true
+        setTimeout(() => {
+            this.isAttacking = false
+        }, 100) // timeout in milliseconds
+
+    }
 }
 
 // ---- Player 1 ----
@@ -137,7 +145,7 @@ function animate(){
     //     player1.velocity.x = 1 
     // } 
 
-    // -- Detect for collision --
+    // ---- Detect for collision ----
     // If (p1.A-box.pos + p1 width) >= p2.pos
     if (player1.attackBox.position.x + player1.attackBox.width >= player2.position.x
         // AND <= p1.A-box.pos.X <= (p2.pos.X + p2.width)
@@ -146,8 +154,9 @@ function animate(){
         && player1.attackBox.position.y + player1.attackBox.height >= player2.position.y
         // AND p2.A-box.pos.Y <= (p2.pos.y + p2.heigh)
         && player1.attackBox.position.y <= player2.position.y + player2.height
+        && player1.isAttacking
         ) {
-        console.log('collision ', x += 1);
+        console.log('go') 
     }
 }
 animate()
@@ -156,7 +165,7 @@ animate()
 window.addEventListener('keydown', (event) => {
     // console.log(event.key) //, event.keyCode);
     switch (event.key) {
-        // -- Player 1 --
+    // ---- Player 1 ----
         case 'd':
             keys.d.pressed = true
             player1.lastKey = 'd'
@@ -168,8 +177,11 @@ window.addEventListener('keydown', (event) => {
         case 'w':
             player1.velocity.y = -20
             break
+        case ' ':
+            player1.attack()
+            break
 
-            // -- Player 2 --
+    // ---- Player 2 ----
         case 'ArrowRight':
             keys.ArrowRight.pressed = true
             player2.lastKey = 'ArrowRight'

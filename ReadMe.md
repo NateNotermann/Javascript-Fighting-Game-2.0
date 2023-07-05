@@ -1,4 +1,4 @@
-# Foobar
+# Javascript Fighting Game!
 
 Test project to make a 2D fighting game in .
 

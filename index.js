@@ -127,6 +127,21 @@ const keys = {
     }
 }
 let x = 0
+
+// --  Reusable rectangle collision function
+function rectangularCollision( { rectangle1, rectangle2 }) {
+    return (
+        rectangle1.attackBox.position.x + rectangle1.attackBox.width >= rectangle2.position.x
+        // AND <= p1.A-box.pos.X <= (p2.pos.X + p2.width)
+        && rectangle1.attackBox.position.x <= rectangle2.position.x + rectangle2.width 
+        // AND (p1.A-box.pos.Y + p1.A-box.height) >= p2.pos.Y
+        && rectangle1.attackBox.position.y + rectangle1.attackBox.height >= rectangle2.position.y
+        // AND p2.A-box.pos.Y <= (p2.pos.y + p2.heigh)
+        && rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height
+        && rectangle1.isAttacking 
+    )
+}
+
 // ---- Main Animate function ---- //
 function animate(){
     window.requestAnimationFrame(animate)
@@ -164,25 +179,50 @@ function animate(){
 
     // ---- Detect for collision ----
     // If (p1.A-box.pos + p1 width) >= p2.pos
-    if (player1.attackBox.position.x + player1.attackBox.width >= player2.position.x
-        // AND <= p1.A-box.pos.X <= (p2.pos.X + p2.width)
-        && player1.attackBox.position.x <= player2.position.x + player2.width 
-        // AND (p1.A-box.pos.Y + p1.A-box.height) >= p2.pos.Y
-        && player1.attackBox.position.y + player1.attackBox.height >= player2.position.y
-        // AND p2.A-box.pos.Y <= (p2.pos.y + p2.heigh)
-        && player1.attackBox.position.y <= player2.position.y + player2.height
-        && player1.isAttacking
-        ) {
 
-        player1.isAttacking = false // stop attacking
-        console.log('attack') 
+    //     if (player1.attackBox.position.x + player1.attackBox.width >= player2.position.x
+    //         // AND <= p1.A-box.pos.X <= (p2.pos.X + p2.width)
+    //         && player1.attackBox.position.x <= player2.position.x + player2.width 
+    //         // AND (p1.A-box.pos.Y + p1.A-box.height) >= p2.pos.Y
+    //         && player1.attackBox.position.y + player1.attackBox.height >= player2.position.y
+    //         // AND p2.A-box.pos.Y <= (p2.pos.y + p2.heigh)
+    //         && player1.attackBox.position.y <= player2.position.y + player2.height
+    //         && player1.isAttacking
+    //         ) {
+    //         player1.isAttacking = false // stop attacking
+    //         console.log('attack') 
+    //     }
+    // }
+// ---- Detect for collision ----
+if (
+    rectangularCollision({
+        rectangle1: player1,
+        rectangle2: player2 
+    })  
+    && player1.isAttacking
+    ) {
+        player1.isAttacking = false
+        console.log('go');
+    }
+
+
+if (
+    rectangularCollision({
+        rectangle1: player2,
+        rectangle2: player1 
+    })  
+    && player2.isAttacking
+    ) {
+        player2.isAttacking = false
+        console.log('player 2 attack!');
     }
 }
+
 animate()
 
 // -- Listen for key press  --
 window.addEventListener('keydown', (event) => {
-    // console.log(event.key) //, event.keyCode);
+    console.log(event.key) //, event.keyCode);
     switch (event.key) {
     // ---- Player 1 ----
         case 'd':
@@ -211,6 +251,9 @@ window.addEventListener('keydown', (event) => {
             break
         case 'ArrowUp':
             player2.velocity.y = -20 
+            break
+        case 'Control':
+            player2.isAttacking = true
             break
     }
 })

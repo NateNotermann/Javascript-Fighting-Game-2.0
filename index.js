@@ -151,14 +151,15 @@ function padTo2Digits(num) {
 
   // Call a Winner 
 function determineWinner({ player1, player2, timerId }){
-    clearTimeout(timerId) // stop the timer
     document.querySelector('#displayText').style.display = 'flex'
     if (player1.health === player2.health ) {
         document.querySelector('#displayText').innerHTML = 'Tie! OverTime!!!'
         timer += 5
     } else if (player1.health > player2.health ) {
+        clearTimeout(timerId) // stop the timer
         document.querySelector('#displayText').innerHTML = 'Player 1 Wins!!!'
     } else if (player1.health < player2.health ) {
+        clearTimeout(timerId) // stop the timer
         document.querySelector('#displayText').innerHTML = 'Player 2 Wins!!!'
     }
  }

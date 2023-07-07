@@ -9,15 +9,15 @@ This app was made using a YouTube tutorial by Chris Course. [GitHub](https://git
 
 
 
-## List of Todo items   
+## Basic Fighting Mechanics:   
 Project Setup - DONE   
 Create Player and Enemy - DONE   
 Move Characters with event listeners - DONE    
 Attacks - DONE    
 Health Bar Interface - DONE    
-Game Timers and Game Over (In Progress)  
+Game Timers and Game Over - DONE  
 
-### List of Todo items  
+### Sprites and Animation:
 Design character art       
 Make character animation frames      
 Add character animation art      
@@ -26,6 +26,8 @@ Design background
 Make background animation frames     
 Add background animation art     
 
+
+### Additional Feature's not in original Tutorial
 Add Xbox Controller API/Code created by CodingWith-Adam     
     [GitHub](https://github.com/CodingWith-Adam/gamepad-api-simple-game)   
     [Main Tutorial](https://www.youtube.com/watch?v=GOjMP6WY8CU&ab_channel=CodingWithAdam)    
@@ -35,8 +37,8 @@ Add Xbox Controller API/Code created by CodingWith-Adam
 
 Add Music    
 Add menus etc.    
-
 Deploy to site    
 
-EXTRA:   
+Stretch Goals:   
 Add sliders to change jump & damage amount & time
+Use Spotify API for music

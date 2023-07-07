@@ -143,6 +143,28 @@ function rectangularCollision( { rectangle1, rectangle2 }) {
     )
 }
 
+let timer = 180
+
+function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+  }
+
+function decreaseTimer() {
+    setTimeout(decreaseTimer, 1000)
+    if (timer > 0) timer --  
+    const hours = Math.floor(timer / 60 /60)
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    const result = `${padTo2Digits(hours)}:${padTo2Digits(minutes)}:${padTo2Digits(seconds)}`
+    document.querySelector('#timer').innerHTML = result
+    // console.log(timer);
+    // console.log(result);
+}
+
+decreaseTimer()
+
+// console.log(result);
+
 // ---- Main Animate function ---- //
 function animate(){
     window.requestAnimationFrame(animate)

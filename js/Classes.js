@@ -1,15 +1,23 @@
 
 // ---- Main Image Sprite Class ----
 class Sprite {
-    constructor({ position, imageSrc }) {
+    constructor({ position, imageSrc, scale = 1 }) {
         this.position = position
         this.height = 150
         this.width = 50 
         this.image = new Image()
         this.image.src = imageSrc
+        this.scale = scale
     }
     draw() {
-        c.drawImage(this.image, this.position.x, this.position.y)
+        c.drawImage(
+            this.image, 
+            this.position.x, 
+            this.position.y, 
+            this.image.width * this.scale, 
+            this.image.height * this.scale
+            
+            )
     }
 
 
@@ -64,7 +72,7 @@ class Fighter {
         this.position.y += this.velocity.y
         
         // --  This is what stops player from falling through the floor -- 
-        if (this.position.y + this.height + this.velocity.y >= canvas.height ) {
+        if (this.position.y + this.height + this.velocity.y >= canvas.height - 96 ) {
             this.velocity.y = 0  // make this negative to make objects bounce // 
         } else 
         this.velocity.y += gravity

@@ -18,8 +18,8 @@ Health Bar Interface - DONE
 Game Timers and Game Over - DONE  
 
 ### Sprites and Animation:
-Background Sprite
-shop Sprite with animation
+Background Sprite - DONE    
+shop Sprite with animation - DONE     
 Player sprite (Samurai Mack)
 Enemy Sprite (Kenji)
 Interface Design and animation

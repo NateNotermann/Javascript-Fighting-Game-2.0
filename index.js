@@ -8,68 +8,17 @@ c.fillRect(0, 0, canvas.width, canvas.height)
 // -- Gravity -- 
 const gravity = 0.7
 
-// ---- Sprite Class ----
-class Sprite {
-    constructor({position, velocity, color = 'red', offset }) {
-        this.position = position
-        this.velocity = velocity
-        this.height = 150
-        this.width = 50
-        this.lastKey
-        this.attackBox = {
-            position: {
-                x: this.position.x,
-                y: this.position.y
-            },
-
-            offset,
-
-            width: 100, 
-            height: 50,
-        }
-        this.color = color
-        this.isAttacking
-        this.health = 100
-    }
-    draw() {
-        // player box
-        c.fillStyle = this.color
-        c.fillRect(this.position.x, this.position.y, 50, this.height)
-
-        // attack box
-        if (this.isAttacking) {
-            c.fillStyle = 'green'
-            c.fillRect(
-                this.attackBox.position.x, 
-                this.attackBox.position.y, 
-                this.attackBox.width, 
-                this.attackBox.height)
-        }
-    }
-    update() {
-        this.draw()
-        this.attackBox.position.x = this.position.x + this.attackBox.offset.x
-        this.attackBox.position.y = this.position.y
-        this.position.x += this.velocity.x
-        this.position.y += this.velocity.y
-        
-        // --  This is what stops player from falling through the floor -- 
-        if (this.position.y + this.height + this.velocity.y >= canvas.height ) {
-            this.velocity.y = 0  // make this negative to make objects bounce // 
-        } else 
-        this.velocity.y += gravity
-    } 
-    attack() {
-        this.isAttacking = true
-        setTimeout(() => {
-            this.isAttacking = false
-        }, 100) // timeout in milliseconds
-
-    }
-}
+//- Background --//
+const background = new Sprite({
+    position: {
+        x: 0,
+        y:0
+    },
+    imageSrc: './img/background.png'
+})
 
 // ---- Player 1 ----
-const player1 = new Sprite({
+const player1 = new Fighter({
     position: {
         x: 0,
         y: 0
@@ -87,7 +36,7 @@ const player1 = new Sprite({
 
 
 // ---- Player 2 ----
-const player2 = new Sprite({
+const player2 = new Fighter({
     position: {
         x: 400, 
         y: 100
@@ -184,13 +133,16 @@ function decreaseTimer() {
 
 decreaseTimer()
 
-// ---- Main Animate function ---- //
+// ---- Main Animate Function ---- //
 function animate(){
     window.requestAnimationFrame(animate)
     c.fillStyle = 'black'
     c.fillRect(0,0, canvas.width, canvas.height )
+    background.update()
+
     player1.update()
     player2.update()
+
 
     player1.velocity.x = 0
     player2.velocity.x = 0
@@ -219,24 +171,6 @@ function animate(){
     //     player1.velocity.x = 1 
     // } 
 
-    // ---- Detect for collision ----
-    // If (p1.A-box.pos + p1 width) >= p2.pos
-
-    //     if (player1.attackBox.position.x + player1.attackBox.width >= player2.position.x
-    //         // AND <= p1.A-box.pos.X <= (p2.pos.X + p2.width)
-    //         && player1.attackBox.position.x <= player2.position.x + player2.width 
-    //         // AND (p1.A-box.pos.Y + p1.A-box.height) >= p2.pos.Y
-    //         && player1.attackBox.position.y + player1.attackBox.height >= player2.position.y
-    //         // AND p2.A-box.pos.Y <= (p2.pos.y + p2.heigh)
-    //         && player1.attackBox.position.y <= player2.position.y + player2.height
-    //         && player1.isAttacking
-    //         ) {
-    //         player1.isAttacking = false // stop attacking
-    //         console.log('attack') 
-    //     }
-    // }
-// ---- Detect for collision ----
-// ---- player 1 ----
 if (
     rectangularCollision({
         rectangle1: player1,

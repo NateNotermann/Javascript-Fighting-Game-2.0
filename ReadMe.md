@@ -18,16 +18,23 @@ Health Bar Interface - DONE
 Game Timers and Game Over - DONE  
 
 ### Sprites and Animation:
-Design character art       
-Make character animation frames      
-Add character animation art      
-
-Design background     
-Make background animation frames     
-Add background animation art     
+Background Sprite
+shop Sprite with animation
+Player sprite (Samurai Mack)
+Enemy Sprite (Kenji)
+Interface Design and animation
+Pushing Live
 
 
 ### Additional Feature's not in original Tutorial
+Design Custom character art       
+Make Custom character animation frames      
+Add Custom character animation art      
+Design Custom background art       
+Make Custom background animation frames     
+Add Custom background animation art     
+
+
 Add Xbox Controller API/Code created by CodingWith-Adam     
     [GitHub](https://github.com/CodingWith-Adam/gamepad-api-simple-game)   
     [Main Tutorial](https://www.youtube.com/watch?v=GOjMP6WY8CU&ab_channel=CodingWithAdam)    

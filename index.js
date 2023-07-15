@@ -140,7 +140,6 @@ function animate(){
     player2.velocity.x = 0
 
     // -- Player 1 Movement --  
-    player1.switchSprite('idle')
     if (keys.a.pressed && keys.d.pressed) {
         player1.velocity.x = 0
         player1.switchSprite('idle')

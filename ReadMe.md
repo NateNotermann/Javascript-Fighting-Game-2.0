@@ -23,7 +23,7 @@ shop Sprite with animation - DONE
 Player sprite (Samurai Mack)
     Idle - DONE    
     Run - DONE          
-    Jump     
+    Jump - DONE          
     Attack    
 Enemy Sprite (Kenji)
     Idle - DONE    

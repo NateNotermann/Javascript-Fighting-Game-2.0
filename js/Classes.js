@@ -130,6 +130,7 @@ class Fighter extends Sprite {
         this.velocity.y += gravity
     } 
     attack() {
+        this.switchSprite('attack1')
         this.isAttacking = true
         setTimeout(() => {
             this.isAttacking = false
@@ -138,6 +139,9 @@ class Fighter extends Sprite {
     }
 
     switchSprite(sprite) {
+        if (this.image === this.sprites.attack1.image 
+            && this.framesCurrent < this.sprites.attack1.framesMax -1 ) return
+
         switch (sprite) {
             case 'idle':
                 if (this.image !== this.sprites.idle.image){

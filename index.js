@@ -76,7 +76,12 @@ const player1 = new Fighter({
             imageSrc: './img/samuraiMack/Attack2.png',
             framesMax: 6,
         },
+        takeHit: {
+            imageSrc: './img/samuraiMack/Take Hit - white silhouette.png',
+            framesMax: 4,
+        }
     },
+
     attackBox: {
         offset: {
             x: 65,
@@ -135,7 +140,12 @@ const player2 = new Fighter({
             imageSrc: './img/kenji/Attack2.png',
             framesMax: 4,
         },
+        takeHit: {
+            imageSrc: './img/kenji/Take hit.png',
+            framesMax: 3,
+        }
     },
+
     attackBox: {
         offset: {
             x: -155,
@@ -246,20 +256,21 @@ function animate(){
     // } 
 
 
-    // ---- player 1 Detect collision ---- 
+    // ---- player 1 Detect collision & player 2 gets hit ---- 
 if (rectangularCollision({
         rectangle1: player1,
         rectangle2: player2 
     })  
-    && player1.isAttacking && player1.framesCurrent === 4
+    && player1.isAttacking 
+    && player1.framesCurrent === 4
     ) {
+        player2.takeHit()
         player1.isAttacking = false
-        player2.health -= 5
+        // player2.health -= 5
         document.querySelector('#player2Health').style.width = player2.health + '%'
         console.log('player 1 attack!');
     }
-
-    // -- if player misses
+    // -- if player1 misses
     if (player1.isAttacking && player1.framesCurrent === 4){
         player1.isAttacking = false
     }
@@ -271,13 +282,20 @@ if (
         rectangle1: player2,
         rectangle2: player1 
     })  
-    && player2.isAttacking && player2.framesCurrent === 4
-    ) {
+    && player2.isAttacking 
+    && player2.framesCurrent === 2
+    ) { 
+        player1.takeHit()
         player2.isAttacking = false
-        player1.health -= 5
+        // player1.health -= 5
         document.querySelector('#player1Health').style.width = player1.health + '%'
         console.log('player 2 attack!');
     }
+    // -- if player2 misses
+    if (player2.isAttacking && player2.framesCurrent === 2){
+        player2.isAttacking = false
+    }
+
 
     // ------ end game based on players health ------ //  
     if (player1.health <= 0 || player2.health <= 0 ) {

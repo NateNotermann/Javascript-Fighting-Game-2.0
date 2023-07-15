@@ -29,7 +29,9 @@ Enemy Sprite (Kenji)
     Idle - DONE    
     Run - DONE           
     Jump - DONE           
-    Attack - DONE       
+    Attack - DONE    
+React to Sprite Animation - DONE    
+Death Hit Animation
 Interface Design and animation
 Pushing Live
 

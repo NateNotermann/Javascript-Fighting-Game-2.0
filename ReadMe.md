@@ -27,9 +27,9 @@ Player sprite (Samurai Mack)
     Attack    
 Enemy Sprite (Kenji)
     Idle - DONE    
-    Run       
-    Jump     
-    Attack   
+    Run - DONE           
+    Jump - DONE           
+    Attack - DONE       
 Interface Design and animation
 Pushing Live
 

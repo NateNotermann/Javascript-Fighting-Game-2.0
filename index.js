@@ -76,6 +76,14 @@ const player1 = new Fighter({
             imageSrc: './img/samuraiMack/Attack2.png',
             framesMax: 6,
         },
+    },
+    attackBox: {
+        offset: {
+            x: 50,
+            y: 50
+        },
+        width: 200,
+        height: 75
     }
 })
 
@@ -127,6 +135,14 @@ const player2 = new Fighter({
             imageSrc: './img/kenji/Attack2.png',
             framesMax: 4,
         },
+    },
+    attackBox: {
+        offset: {
+            x: -165,
+            y: 50
+        },
+        width: 200,
+        height: 75
     }
 })
 
@@ -212,7 +228,7 @@ function animate(){
     } else {
         player2.velocity.x = 0
         player2.switchSprite('idle')
-        // player1.image = player1.sprites.idle.image
+        // player1.image = player1.sprites.idle.image 
     }
 
     // -- Player 2 Jump -- 

@@ -43,7 +43,14 @@ const player1 = new Fighter({
         x: 0,
         y: 0
     },
-    color: 'red'
+    // color: 'red'
+    imageSrc: './img/samuraiMack/Idle.png',
+    scale: 2.5,
+    framesMax: 8,
+    offset:  {
+        x: 215,
+        y: 157
+    }
 })
 
 
@@ -61,7 +68,14 @@ const player2 = new Fighter({
         x: -50,
         y: 0
     },
-    color: 'blue'
+    // color: 'blue'
+    imageSrc: './img/kenji/Idle.png',
+    scale: 2.5,
+    framesMax: 4,
+    offset:  {
+        x: 215,
+        y: 157
+    }
 })
 
 // -- Hold value for Key press. Default is false -- 

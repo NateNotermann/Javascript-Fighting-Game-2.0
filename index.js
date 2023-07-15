@@ -79,10 +79,10 @@ const player1 = new Fighter({
     },
     attackBox: {
         offset: {
-            x: 50,
+            x: 65,
             y: 50
         },
-        width: 200,
+        width: 165,
         height: 75
     }
 })
@@ -138,10 +138,10 @@ const player2 = new Fighter({
     },
     attackBox: {
         offset: {
-            x: -165,
+            x: -155,
             y: 50
         },
-        width: 200,
+        width: 165,
         height: 75
     }
 })
@@ -245,12 +245,13 @@ function animate(){
     //     player1.velocity.x = 1 
     // } 
 
-if (
-    rectangularCollision({
+
+    // ---- player 1 Detect collision ---- 
+if (rectangularCollision({
         rectangle1: player1,
         rectangle2: player2 
     })  
-    && player1.isAttacking
+    && player1.isAttacking && player1.framesCurrent === 4
     ) {
         player1.isAttacking = false
         player2.health -= 5
@@ -258,13 +259,19 @@ if (
         console.log('player 1 attack!');
     }
 
-// ---- player 2 ----
+    // -- if player misses
+    if (player1.isAttacking && player1.framesCurrent === 4){
+        player1.isAttacking = false
+    }
+
+
+    // ---- player 2 Detect collision  ----
 if (
     rectangularCollision({
         rectangle1: player2,
         rectangle2: player1 
     })  
-    && player2.isAttacking
+    && player2.isAttacking && player2.framesCurrent === 4
     ) {
         player2.isAttacking = false
         player1.health -= 5
@@ -272,7 +279,7 @@ if (
         console.log('player 2 attack!');
     }
 
-    // ---- end game based on players health ---- //  
+    // ------ end game based on players health ------ //  
     if (player1.health <= 0 || player2.health <= 0 ) {
         determineWinner({player1, player2, timerId})
     }

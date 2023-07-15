@@ -125,6 +125,7 @@ class Fighter extends Sprite {
         // --  This is what stops player from falling through the floor -- 
         if (this.position.y + this.height + this.velocity.y >= canvas.height - 96 ) {
             this.velocity.y = 0  // make this negative to make objects bounce // 
+            this.position.y = 330
         } else 
         this.velocity.y += gravity
     } 
@@ -159,8 +160,20 @@ class Fighter extends Sprite {
                 this.framesCurrent = 0
                 }
                 break
-            case 'attack':
-                break 
+            case 'fall':
+                if(this.image !== this.sprites.fall.image){
+                    this.image = player1.sprites.fall.image
+                    this.framesMax = this.sprites.fall.framesMax
+                    this.framesCurrent = 0
+                    }
+                break
+            case 'attack1':
+                if(this.image !== this.sprites.attack1.image){
+                    this.image = player1.sprites.attack1.image
+                    this.framesMax = this.sprites.attack1.framesMax
+                    this.framesCurrent = 0
+                    }
+                break  
             
         }
     }

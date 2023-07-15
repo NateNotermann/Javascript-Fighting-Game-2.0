@@ -134,10 +134,16 @@ function animate(){
     // -- Player 1 Movement --  
     if (keys.a.pressed && keys.d.pressed) {
         player1.velocity.x = 0
+        player1.image = player1.sprites.idle.image
     } else if (keys.d.pressed) {
         player1.velocity.x = 5 
+        player1.image = player1.sprites.run.image
     } else if (keys.a.pressed) {
         player1.velocity.x = -5
+        player1.image = player1.sprites.run.image
+    } else {
+        player1.velocity.x = 0
+        player1.image = player1.sprites.idle.image
     }
 
     // -- Player 2 Movement -- 

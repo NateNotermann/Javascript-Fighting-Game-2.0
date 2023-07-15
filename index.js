@@ -59,6 +59,14 @@ const player1 = new Fighter({
         run: { 
             imageSrc: './img/samuraiMack/Run.png',
             framesMax: 8,
+        },
+        jump: { 
+            imageSrc: './img/samuraiMack/Jump.png',
+            framesMax: 2,
+        },
+        attack: { 
+            imageSrc: './img/samuraiMack/Attack.png',
+            framesMax: 6,
         }
     }
 })
@@ -132,18 +140,27 @@ function animate(){
     player2.velocity.x = 0
 
     // -- Player 1 Movement --  
+    player1.switchSprite('idle')
     if (keys.a.pressed && keys.d.pressed) {
         player1.velocity.x = 0
-        player1.image = player1.sprites.idle.image
+        player1.switchSprite('idle')
+        // player1.image = player1.sprites.idle.image
     } else if (keys.d.pressed) {
         player1.velocity.x = 5 
-        player1.image = player1.sprites.run.image
+        player1.switchSprite('run')
+        // player1.image = player1.sprites.run.image
     } else if (keys.a.pressed) {
         player1.velocity.x = -5
-        player1.image = player1.sprites.run.image
+        player1.switchSprite('run')
+        // player1.image = player1.sprites.run.image
     } else {
         player1.velocity.x = 0
-        player1.image = player1.sprites.idle.image
+        player1.switchSprite('idle')
+        // player1.image = player1.sprites.idle.image
+    }
+
+    if(player1.velocity.y < 0 ){
+        player1.switchSprite('jump')
     }
 
     // -- Player 2 Movement -- 
@@ -188,7 +205,7 @@ if (
         console.log('player 2 attack!');
     }
 
-    // -- end game based on players health -- 
+    // ---- end game based on players health ---- //  
     if (player1.health <= 0 || player2.health <= 0 ) {
         determineWinner({player1, player2, timerId})
     }

@@ -135,4 +135,33 @@ class Fighter extends Sprite {
         }, 100) // timeout in milliseconds
 
     }
+
+    switchSprite(sprite) {
+        switch (sprite) {
+            case 'idle':
+                if (this.image !== this.sprites.idle.image){
+                    this.image = player1.sprites.idle.image
+                    this.framesMax = this.sprites.idle.framesMax
+                }
+                break
+            case 'run':
+                if(this.image !== this.sprites.run.image){
+                    this.image = player1.sprites.run.image
+                    this.framesMax = this.sprites.run.framesMax
+                }
+                break
+            case 'jump':
+                if(this.image !== this.sprites.jump.image){
+                this.image = player1.sprites.jump.image
+                this.framesMax = this.sprites.jump.framesMax
+                }
+                break
+            case 'attack':
+                break 
+            
+        }
+    }
+
+
+
 }

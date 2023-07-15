@@ -317,38 +317,45 @@ animate()
 // -- Listen for key press  --
 window.addEventListener('keydown', (event) => {
     // console.log(event.key) //, event.keyCode);
-    switch (event.key) {
+
     // ---- Player 1 ----
-        case 'd':
-            keys.d.pressed = true
-            player1.lastKey = 'd'
-            break
-        case 'a':
-            keys.a.pressed = true
-            player1.lastKey = 'a'
-            break
-        case 'w':
-            player1.velocity.y = -20
-            break
-        case ' ':
-            player1.attack()
-            break
+    if (!player1.dead) {
+        switch (event.key) {
+            case 'd':
+                keys.d.pressed = true
+                player1.lastKey = 'd'
+                break
+            case 'a':
+                keys.a.pressed = true
+                player1.lastKey = 'a'
+                break
+            case 'w':
+                player1.velocity.y = -20
+                break
+            case ' ':
+                player1.attack()
+                break
+        }
+    }
 
     // ---- Player 2 ----
-        case 'ArrowRight':
-            keys.ArrowRight.pressed = true
-            player2.lastKey = 'ArrowRight'
-            break
-        case 'ArrowLeft':
-            keys.ArrowLeft.pressed = true
-            player2.lastKey = 'ArrowLeft'
-            break
-        case 'ArrowUp':
-            player2.velocity.y = -20 
-            break
-        case 'Control':
-            player2.attack()
-            break
+    if (!player2.dead) {
+        switch (event.key) {
+            case 'ArrowRight':
+                keys.ArrowRight.pressed = true
+                player2.lastKey = 'ArrowRight'
+                break
+            case 'ArrowLeft':
+                keys.ArrowLeft.pressed = true
+                player2.lastKey = 'ArrowLeft'
+                break
+            case 'ArrowUp':
+                player2.velocity.y = -20 
+                break
+            case 'Control':
+                player2.attack()
+                break
+        }
     }
 })
 

@@ -21,7 +21,15 @@ Game Timers and Game Over - DONE
 Background Sprite - DONE    
 shop Sprite with animation - DONE     
 Player sprite (Samurai Mack)
+    Idle - DONE    
+    Run       
+    Jump     
+    Attack    
 Enemy Sprite (Kenji)
+    Idle - DONE    
+    Run       
+    Jump     
+    Attack   
 Interface Design and animation
 Pushing Live
 

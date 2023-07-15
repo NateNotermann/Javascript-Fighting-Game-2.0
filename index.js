@@ -100,7 +100,33 @@ const player2 = new Fighter({
     framesMax: 4,
     offset:  {
         x: 215,
-        y: 157
+        y: 169
+    },
+    sprites: {
+        idle: { 
+            imageSrc: './img/kenji/Idle.png',
+            framesMax: 4,
+        },
+        run: { 
+            imageSrc: './img/kenji/Run.png',
+            framesMax: 8,
+        },
+        jump: { 
+            imageSrc: './img/kenji/Jump.png',
+            framesMax: 2,
+        },
+        fall: {
+            imageSrc: './img/kenji/Fall.png',
+            framesMax: 2,
+        },
+        attack1: { 
+            imageSrc: './img/kenji/Attack1.png',
+            framesMax: 4,
+        },
+        attack2: { 
+            imageSrc: './img/kenji/Attack2.png',
+            framesMax: 4,
+        },
     }
 })
 
@@ -141,7 +167,7 @@ function animate(){
     background.update()
     shop.update()
     player1.update()
-    // player2.update()
+    player2.update()
 
 
     player1.velocity.x = 0
@@ -166,6 +192,7 @@ function animate(){
         // player1.image = player1.sprites.idle.image
     }
 
+    // -- Player 2 Jump --
     if(player1.velocity.y < 0 ){
         player1.switchSprite('jump')
     } else if (player1.velocity.y > 0 ) {
@@ -175,11 +202,26 @@ function animate(){
     // -- Player 2 Movement -- 
     if (keys.ArrowRight.pressed && keys.ArrowLeft.pressed) {
         player2.velocity.x = 0
+        player2.switchSprite('idle')
     } else if (keys.ArrowRight.pressed) {
         player2.velocity.x = 5
+        player2.switchSprite('run')
     } else if (keys.ArrowLeft.pressed) {
         player2.velocity.x = -5
+        player2.switchSprite('run')
+    } else {
+        player2.velocity.x = 0
+        player2.switchSprite('idle')
+        // player1.image = player1.sprites.idle.image
     }
+
+    // -- Player 2 Jump -- 
+    if(player2.velocity.y < 0 ){
+        player2.switchSprite('jump')
+    } else if (player2.velocity.y > 0 ) {
+        player2.switchSprite('fall')
+    }
+
     // --  not using this code. Was tutorials version of movement logic
     // if (keys.a.pressed && lastKey === 'a') {
     //     player1.velocity.x = -1

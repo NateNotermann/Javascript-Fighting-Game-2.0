@@ -13,7 +13,7 @@ function rectangularCollision( { rectangle1, rectangle2 }) {
     )
 }
 
-let timer = 8
+let timer = 30
 let timerId
 function padTo2Digits(num) {
     return num.toString().padStart(2, '0');

@@ -200,6 +200,8 @@ function animate(){
     c.fillRect(0,0, canvas.width, canvas.height )
     background.update()
     shop.update()
+    c.fillStyle = 'rgba(255, 255, 255, 0.15'
+    c.fillRect(0,0, canvas.width, canvas.height)
     player1.update()
     player2.update()
 
@@ -273,11 +275,14 @@ if (rectangularCollision({
     && player1.framesCurrent === 4
     ) {
         player2.takeHit()
-        player1.isAttacking = false
-        // player2.health -= 5
-        document.querySelector('#player2Health').style.width = player2.health + '%'
-        console.log('player 1 attack!');
-    }
+        player1.isAttacking = false 
+        // player2.health -= 5 (Doing this in .takehit()
+        // document.querySelector('#player2Health').style.width = player2.health + '%'
+        gsap.to('#player2Health', {
+            width: player2.health + '%'
+        })
+        // console.log('player 1 attack!');
+    } 
     // -- if player1 misses
     if (player1.isAttacking && player1.framesCurrent === 4){
         player1.isAttacking = false
@@ -296,8 +301,11 @@ if (
         player1.takeHit()
         player2.isAttacking = false
         // player1.health -= 5
-        document.querySelector('#player1Health').style.width = player1.health + '%'
-        console.log('player 2 attack!');
+        // document.querySelector('#player1Health').style.width = player1.health + '%'
+        gsap.to('#player1Health', {
+            width: player1.health + '%'
+        })
+        // console.log('player 2 attack!');
     }
     // -- if player2 misses
     if (player2.isAttacking && player2.framesCurrent === 2){

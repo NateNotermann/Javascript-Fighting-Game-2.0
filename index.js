@@ -200,6 +200,7 @@ let interval = 1000/fps;
 let delta;
 // ------ frame/refresh rate limiting code: variables: end ------ //
 
+
 // ---- Main Animate Function ---- //
 function animate(){
     window.requestAnimationFrame(animate)

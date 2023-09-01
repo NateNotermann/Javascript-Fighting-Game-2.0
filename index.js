@@ -193,7 +193,7 @@ let x = 0
 
 decreaseTimer()
 // ------ frame/refresh rate limiting code: variables: start ------ //
-let fps = 30;
+let fps = 60;
 let now;
 let then = Date.now();
 let interval = 1000/fps;

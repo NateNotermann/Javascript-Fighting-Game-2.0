@@ -1,9 +1,165 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
-canvas.width = 1024  //visualViewport.width - 10
+canvas.width = 1024     //window.innerWidth  //visualViewport.width - 10
 canvas.height = 576  //visualViewport.height - 10
 
 c.fillRect(0, 0, canvas.width, canvas.height)
+
+// ---- GAMEPAD variables ---- //
+let playerWidthAndHeight = 0
+let playerX = 0;
+let playerY = 0;
+let playerColor = 'orange';
+let velocity = 0;
+
+let controllerIndex = null;
+let leftPressed = false;
+let rightPressed = false;
+let upPressed = false;
+let downPressed = false;
+
+let bluePressed = false;
+let yellowPressed = false;
+let redPressed = false;
+let greenPressed = false;
+
+let connected = false
+let gameLoopCheck = false
+// ---- GAMEPAD variables ---- //
+
+
+// // ------ dynamic resize width only: start ------ //
+// function setUpCanvas(){ // sets default player attributes
+//     canvas.width = window.innerWidth;       // Example Width 1000px
+//     // canvas.height = window.innerHeight;     // Example Height 1000px
+//     // playerWidthAndHeight = canvas.width *0.1;   // Makes player WH = 100px. (1000 * 0.1)
+//     // velocity = canvas.width * 0.01;             // Makes player Velocity 1.  (1000 * 0.01)
+
+//     // playerX = (canvas.width - playerWidthAndHeight) / 2;        // (1000px - 100px) / 2.   aka 900 / 2 = 450.
+//     // playerY = (canvas.height - playerWidthAndHeight) / 2;       // (1000px - 100px) / 2.   aka 900 / 2 = 450.
+// }
+// setUpCanvas(); 
+// window.addEventListener('resize', setUpCanvas);
+// // ------ dynamic resize width only: End ------ //
+
+
+window.addEventListener('gamepadconnected', (event) => {    // gamepad Connected event listener. Must press button first.
+    connected = true
+    controllerIndex = event.gamepad.index;
+    console.log('gamepad Connected Status: ', connected);
+})
+
+window.addEventListener('gamepaddisconnected', (event) => {    // gamepad Disconnected event listener
+    connected = false
+    controllerIndex = event.gamepad.index;
+    console.log('gamepad Connected Status: ', connected);
+})
+
+function checkPlayerAttributes (){
+    console.log('player W/H: ', playerWidthAndHeight, "x", playerWidthAndHeight);
+    console.log('playerX: ', playerX, ". ", "playerY: ", playerY);
+    console.log('gamepad Connected Status: ', connected);
+    console.log('playerColor:', playerColor);
+    if (gameLoopCheck) { console.log('gameLoop running');}
+    // console.log(gamepad.controllerIndex);
+    // console.log(gamepad.buttons);
+}
+
+function controllerInput() {
+    if(controllerIndex !== null) {
+        const gamepad = navigator.getGamepads()[controllerIndex]
+        const buttons = gamepad.buttons;
+        upPressed = buttons[12].pressed;
+        downPressed = buttons[13].pressed;
+        leftPressed = buttons[14].pressed;
+        rightPressed = buttons[15].pressed;
+
+        const stickDeadZone = 0.4;              // change to 0.8 to only allow movement in one direction at a time.
+        const leftRightValue = gamepad.axes[0];
+        const upDownValue = gamepad.axes[1];
+
+        if(leftRightValue >= stickDeadZone) {   // if gamepad left/right axes is >= than deadZone, move right
+            rightPressed = true;
+        } 
+        else if (leftRightValue <= -stickDeadZone) {    // if gamepad left/right axes is <= than deadZone, move left
+            leftPressed = true;
+        }
+
+        if(upDownValue >= stickDeadZone) { // if gamepad up/down axes is >= than deadZone, move up
+            downPressed = true;
+        } 
+        else if (upDownValue <= -stickDeadZone) { // if gamepad up/down axes is <= than deadZone, move down
+            upPressed = true;
+        }
+
+        greenPressed = buttons[0].pressed;
+        redPressed = buttons[1].pressed;
+        bluePressed = buttons[2].pressed;
+        yellowPressed = buttons[3].pressed;
+
+    }
+};
+
+// function movePlayer() {
+//     if(upPressed) {
+//         playerY -= velocity;
+//     }
+//     if(downPressed) {
+//         playerY += velocity;
+//     }
+//     if(leftPressed) {
+//         playerX -= velocity;
+//     }
+//     if(rightPressed) {
+//         playerX += velocity;
+//     }
+// }
+
+function checkButtonPressed() {     // green[0], red[1], blue[2], yellow[3]
+    if (controllerIndex !== null ){
+
+    
+        const gamepad = navigator.getGamepads()[controllerIndex]
+        const buttons = gamepad.buttons;
+
+        if(greenPressed) {              // [0]
+            player1.velocity.y = -10
+            // changePlayerColor("green")  // green
+        } 
+        if(buttons[1].pressed) {        // [1]
+            // changePlayerColor("red")    // red
+            // playerColor = "red"         
+        } 
+        if(buttons[2].pressed) {        // [2]
+            player1.attack()
+            // changePlayerColor("blue")   // blue
+            // playerColor = "blue"        
+        } 
+        if(buttons[3].pressed) {        // [3]
+            // changePlayerColor("yellow") // yellow
+            // playerColor = "yellow"      
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // -- Gravity -- 
 const gravity = 0.7
@@ -205,6 +361,13 @@ let delta;
 function animate(){
     window.requestAnimationFrame(animate)
 
+    // ---- GAMEPAD CODE ---- //
+    checkPlayerAttributes();     // Checks/Console logs gamepad attributes
+    controllerInput();
+    checkButtonPressed();
+    // ---- GAMEPAD CODE ---- //
+
+
     // ------ frame/refresh rate limiting code: start ------ //
     now = Date.now();
     delta = now - then;
@@ -230,11 +393,11 @@ function animate(){
             player1.velocity.x = 0
             player1.switchSprite('idle')
             // player1.image = player1.sprites.idle.image
-        } else if (keys.d.pressed) {
+        } else if (keys.d.pressed || rightPressed ) {
             player1.velocity.x = 5 
             player1.switchSprite('run')
             // player1.image = player1.sprites.run.image
-        } else if (keys.a.pressed) {
+        } else if (keys.a.pressed || leftPressed) {
             player1.velocity.x = -5
             player1.switchSprite('run')
             // player1.image = player1.sprites.run.image
@@ -244,14 +407,14 @@ function animate(){
             // player1.image = player1.sprites.idle.image
         }
 
-        // -- Player 2 Jump --
+        // -- Player 2 Jump ARROWS--
         if(player1.velocity.y < 0 ){
             player1.switchSprite('jump')
         } else if (player1.velocity.y > 0 ) {
             player1.switchSprite('fall')
         }
 
-        // -- Player 2 Movement -- 
+        // -- Player 2 Movement ARROWS-- 
         if (keys.ArrowRight.pressed && keys.ArrowLeft.pressed) {
             player2.velocity.x = 0
             player2.switchSprite('idle')
@@ -267,7 +430,7 @@ function animate(){
             // player1.image = player1.sprites.idle.image 
         }
 
-        // -- Player 2 Jump -- 
+        // -- Player 2 Jump ARROWS-- 
         if(player2.velocity.y < 0 ){
             player2.switchSprite('jump')
         } else if (player2.velocity.y > 0 ) {

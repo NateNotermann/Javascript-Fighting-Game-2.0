@@ -5,12 +5,12 @@ canvas.height = 576  //visualViewport.height - 10
 
 c.fillRect(0, 0, canvas.width, canvas.height)
 
-// ---- GAMEPAD variables ---- //
-let playerWidthAndHeight = 0
-let playerX = 0;
-let playerY = 0;
-let playerColor = 'orange';
-let velocity = 0;
+// -------- GAMEPAD variables -------- //
+// let playerWidthAndHeight = 0
+// let playerX = 0;
+// let playerY = 0;
+// let playerColor = 'orange';
+// let velocity = 0;
 
 let controllerIndex = null;
 let leftPressed = false;
@@ -24,8 +24,8 @@ let redPressed = false;
 let greenPressed = false;
 
 let connected = false
-let gameLoopCheck = false
-// ---- GAMEPAD variables ---- //
+let animateLoop = false
+// -------- GAMEPAD variables -------- //
 
 
 // // ------ dynamic resize width only: start ------ //
@@ -46,23 +46,93 @@ let gameLoopCheck = false
 window.addEventListener('gamepadconnected', (event) => {    // gamepad Connected event listener. Must press button first.
     connected = true
     controllerIndex = event.gamepad.index;
-    console.log('gamepad Connected Status: ', connected);
+    checkPlayerAttributes();
 })
 
 window.addEventListener('gamepaddisconnected', (event) => {    // gamepad Disconnected event listener
     connected = false
     controllerIndex = event.gamepad.index;
-    console.log('gamepad Connected Status: ', connected);
 })
 
+console.log('gamepad Connected Status: ', connected);
+
+const connectedControllers = [];
+
+function checkAllControllers() {
+    const gamepad = navigator.getGamepads()[controllerIndex]
+    if(controllerIndex !== null) {
+        updateConnectedControllers();
+        // getConnectedGamepadCount();
+        // console.log('number of connected gamepads', connectedControllers.length, 'connectedArray', connectedControllers );
+        for (let i = 0; i < controllerIndex.length; i++ ) {
+            console.log('gamepad index', gamepad.index);
+        }
+    
+    }
+}
+
+function updateConnectedControllers() {
+    const gamepadsArray = navigator.getGamepads();
+    console.log('gamepadsArray', gamepadsArray);
+    //clear array before updating
+    connectedControllers.length = 0;
+
+    for (let i = 0; i < gamepadsArray.length; i++) {
+        const gamepad = gamepadsArray[i];
+        if (gamepad !== null) {
+            connectedControllers.push({
+                index: gamepad.index, 
+                id: gamepad.id
+            });
+            console.log('connectedControllers', connectedControllers);
+        }
+    }
+}
+
+updateConnectedControllers();
+
+function updateDOM() {
+    const controllerCountElement = document.getElementById('controllerCount');
+    controllerCountElement.textContent = `# of Gamepads: ${getConnectedGamepadCount()}`;
+
+    const connectedControllersElement = document.getElementById('connectedControllers');
+    connectedControllersElement.innerHTML = '';
+
+    connectedControllers.forEach(controller => {
+      const controllerInfo = document.createElement('div');
+      controllerInfo.textContent = `Player: ${controller.index + 1}`;
+      connectedControllersElement.appendChild(controllerInfo);
+    });
+  }
+// Function to check the number of connected gamepads
+function getConnectedGamepadCount() {
+    return connectedControllers.length;
+}
+
+// check and update the connectedControllers array
+
+//Check the number of connected gamepads and display the result
+// let connectedCount = getConnectedGamepadCount();
+
+
+
+
+
+
+
 function checkPlayerAttributes (){
-    console.log('player W/H: ', playerWidthAndHeight, "x", playerWidthAndHeight);
-    console.log('playerX: ', playerX, ". ", "playerY: ", playerY);
+    const gamepad = navigator.getGamepads()[controllerIndex]
+    const buttons = gamepad.buttons;
+    // console.log('player W/H: ', playerWidthAndHeight, "x", playerWidthAndHeight);
+    // console.log('playerX: ', playerX, ". ", "playerY: ", playerY);
     console.log('gamepad Connected Status: ', connected);
-    console.log('playerColor:', playerColor);
-    if (gameLoopCheck) { console.log('gameLoop running');}
+    // console.log('playerColor:', playerColor);
+    console.log('gamepad: ' + gamepad.id);
+    console.log('gamepad: ' + gamepad.index);
+    
+    if (animateLoop) { console.log('animateLoop running');}
     // console.log(gamepad.controllerIndex);
-    // console.log(gamepad.buttons);
+    // console.log(gamepad.buttons);r
 }
 
 function controllerInput() {
@@ -359,12 +429,15 @@ let delta;
 
 // ---- Main Animate Function ---- //
 function animate(){
+    animateLoop = true;  
     window.requestAnimationFrame(animate)
 
     // ---- GAMEPAD CODE ---- //
-    checkPlayerAttributes();     // Checks/Console logs gamepad attributes
+    checkAllControllers();
+    // checkPlayerAttributes();     // Checks/Console logs gamepad attributes
     controllerInput();
     checkButtonPressed();
+    updateDOM();
     // ---- GAMEPAD CODE ---- //
 
 

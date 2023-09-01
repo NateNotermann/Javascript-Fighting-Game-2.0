@@ -120,11 +120,28 @@
 							align-items: center; 
 							justify-content: center;">
             		Tie
-						</div>
+			</div>
+						
 
-            <canvas></canvas>
+			<div id="controllerCount" style="
+			position: absolute; 
+			width: 30%;
+			height: 30px;
+			top: 500px; right:0; bottom: 0; left: 0; border: solid; border-color: red;" >Connected gamepads: 0</div>
+
+			<div id="connectedControllers" style="position: absolute; 
+			width: 20%;
+			height: 30px;
+			top: 530px; right:0; bottom: 0; left: 0; border: solid; border-color: green;"></div>
+			
+<canvas>
+
+
+</canvas>
 
         </div>
+
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" 
 					integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" 
 					crossorigin="anonymous" 

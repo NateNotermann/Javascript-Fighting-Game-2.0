@@ -192,132 +192,148 @@ let x = 0
 
 
 decreaseTimer()
+// ------ frame/refresh rate limiting code: variables: start ------ //
+let fps = 30;
+let now;
+let then = Date.now();
+let interval = 1000/fps;
+let delta;
+// ------ frame/refresh rate limiting code: variables: end ------ //
 
 // ---- Main Animate Function ---- //
 function animate(){
     window.requestAnimationFrame(animate)
-    c.fillStyle = 'black'
-    c.fillRect(0,0, canvas.width, canvas.height )
-    background.update()
-    shop.update()
-    c.fillStyle = 'rgba(255, 255, 255, 0.15'
-    c.fillRect(0,0, canvas.width, canvas.height)
-    player1.update()
-    player2.update()
+
+    // ------ frame/refresh rate limiting code: start ------ //
+    now = Date.now();
+    delta = now - then;
+    if (delta > interval) {
+        then = now - (delta % interval);
+    // ------ frame/refresh rate limiting code: open bracket ------ //
+
+        c.fillStyle = 'black'
+        c.fillRect(0,0, canvas.width, canvas.height )
+        background.update()
+        shop.update()
+        c.fillStyle = 'rgba(255, 255, 255, 0.15'
+        c.fillRect(0,0, canvas.width, canvas.height)
+        player1.update()
+        player2.update()
 
 
-    player1.velocity.x = 0
-    player2.velocity.x = 0
-
-    // -- Player 1 Movement --  
-    if (keys.a.pressed && keys.d.pressed) {
         player1.velocity.x = 0
-        player1.switchSprite('idle')
-        // player1.image = player1.sprites.idle.image
-    } else if (keys.d.pressed) {
-        player1.velocity.x = 5 
-        player1.switchSprite('run')
-        // player1.image = player1.sprites.run.image
-    } else if (keys.a.pressed) {
-        player1.velocity.x = -5
-        player1.switchSprite('run')
-        // player1.image = player1.sprites.run.image
-    } else {
-        player1.velocity.x = 0
-        player1.switchSprite('idle')
-        // player1.image = player1.sprites.idle.image
-    }
-
-    // -- Player 2 Jump --
-    if(player1.velocity.y < 0 ){
-        player1.switchSprite('jump')
-    } else if (player1.velocity.y > 0 ) {
-        player1.switchSprite('fall')
-    }
-
-    // -- Player 2 Movement -- 
-    if (keys.ArrowRight.pressed && keys.ArrowLeft.pressed) {
         player2.velocity.x = 0
-        player2.switchSprite('idle')
-    } else if (keys.ArrowRight.pressed) {
-        player2.velocity.x = 5
-        player2.switchSprite('run')
-    } else if (keys.ArrowLeft.pressed) {
-        player2.velocity.x = -5
-        player2.switchSprite('run')
-    } else {
-        player2.velocity.x = 0
-        player2.switchSprite('idle')
-        // player1.image = player1.sprites.idle.image 
-    }
 
-    // -- Player 2 Jump -- 
-    if(player2.velocity.y < 0 ){
-        player2.switchSprite('jump')
-    } else if (player2.velocity.y > 0 ) {
-        player2.switchSprite('fall')
-    }
+        // -- Player 1 Movement --  
+        if (keys.a.pressed && keys.d.pressed) {
+            player1.velocity.x = 0
+            player1.switchSprite('idle')
+            // player1.image = player1.sprites.idle.image
+        } else if (keys.d.pressed) {
+            player1.velocity.x = 5 
+            player1.switchSprite('run')
+            // player1.image = player1.sprites.run.image
+        } else if (keys.a.pressed) {
+            player1.velocity.x = -5
+            player1.switchSprite('run')
+            // player1.image = player1.sprites.run.image
+        } else {
+            player1.velocity.x = 0
+            player1.switchSprite('idle')
+            // player1.image = player1.sprites.idle.image
+        }
 
-    // --  not using this code. Was tutorials version of movement logic
-    // if (keys.a.pressed && lastKey === 'a') {
-    //     player1.velocity.x = -1
-    // } else if (keys.d.pressed && lastKey === 'd') {
-    //     player1.velocity.x = 1 
-    // } 
+        // -- Player 2 Jump --
+        if(player1.velocity.y < 0 ){
+            player1.switchSprite('jump')
+        } else if (player1.velocity.y > 0 ) {
+            player1.switchSprite('fall')
+        }
 
+        // -- Player 2 Movement -- 
+        if (keys.ArrowRight.pressed && keys.ArrowLeft.pressed) {
+            player2.velocity.x = 0
+            player2.switchSprite('idle')
+        } else if (keys.ArrowRight.pressed) {
+            player2.velocity.x = 5
+            player2.switchSprite('run')
+        } else if (keys.ArrowLeft.pressed) {
+            player2.velocity.x = -5
+            player2.switchSprite('run')
+        } else {
+            player2.velocity.x = 0
+            player2.switchSprite('idle')
+            // player1.image = player1.sprites.idle.image 
+        }
 
-    // ---- player 1 Detect collision & player 2 gets hit ---- 
-if (rectangularCollision({
-        rectangle1: player1,
-        rectangle2: player2 
-    })  
-    && player1.isAttacking 
-    && player1.framesCurrent === 4
-    ) {
-        player2.takeHit()
-        player1.isAttacking = false 
-        // player2.health -= 5 (Doing this in .takehit()
-        // document.querySelector('#player2Health').style.width = player2.health + '%'
-        gsap.to('#player2Health', {
-            width: player2.health + '%'
-        })
-        // console.log('player 1 attack!');
-    } 
-    // -- if player1 misses
-    if (player1.isAttacking && player1.framesCurrent === 4){
-        player1.isAttacking = false
-    }
+        // -- Player 2 Jump -- 
+        if(player2.velocity.y < 0 ){
+            player2.switchSprite('jump')
+        } else if (player2.velocity.y > 0 ) {
+            player2.switchSprite('fall')
+        }
 
-
-    // ---- player 2 Detect collision  ----
-if (
-    rectangularCollision({
-        rectangle1: player2,
-        rectangle2: player1 
-    })  
-    && player2.isAttacking 
-    && player2.framesCurrent === 2
-    ) { 
-        player1.takeHit()
-        player2.isAttacking = false
-        // player1.health -= 5
-        // document.querySelector('#player1Health').style.width = player1.health + '%'
-        gsap.to('#player1Health', {
-            width: player1.health + '%'
-        })
-        // console.log('player 2 attack!');
-    }
-    // -- if player2 misses
-    if (player2.isAttacking && player2.framesCurrent === 2){
-        player2.isAttacking = false
-    }
+        // --  not using this code. Was tutorials version of movement logic
+        // if (keys.a.pressed && lastKey === 'a') {
+        //     player1.velocity.x = -1
+        // } else if (keys.d.pressed && lastKey === 'd') {
+        //     player1.velocity.x = 1 
+        // } 
 
 
-    // ------ end game based on players health ------ //  
-    if (player1.health <= 0 || player2.health <= 0 ) {
-        determineWinner({player1, player2, timerId})
-    }
+        // ---- player 1 Detect collision & player 2 gets hit ---- 
+        if (rectangularCollision({
+            rectangle1: player1,
+            rectangle2: player2 
+        })  
+        && player1.isAttacking 
+        && player1.framesCurrent === 4
+        ) {
+            player2.takeHit()
+            player1.isAttacking = false 
+            // player2.health -= 5 (Doing this in .takehit()
+            // document.querySelector('#player2Health').style.width = player2.health + '%'
+            gsap.to('#player2Health', {
+                width: player2.health + '%'
+            })
+            // console.log('player 1 attack!');
+        } 
+        // -- if player1 misses
+        if (player1.isAttacking && player1.framesCurrent === 4){
+            player1.isAttacking = false
+        }
 
+
+        // ---- player 2 Detect collision  ----
+        if (
+        rectangularCollision({
+            rectangle1: player2,
+            rectangle2: player1 
+        })  
+        && player2.isAttacking 
+        && player2.framesCurrent === 2
+        ) { 
+            player1.takeHit()
+            player2.isAttacking = false
+            // player1.health -= 5
+            // document.querySelector('#player1Health').style.width = player1.health + '%'
+            gsap.to('#player1Health', {
+                width: player1.health + '%'
+            })
+            // console.log('player 2 attack!');
+        }
+        // -- if player2 misses
+        if (player2.isAttacking && player2.framesCurrent === 2){
+            player2.isAttacking = false
+        }
+
+
+        // ------ end game based on players health ------ //  
+        if (player1.health <= 0 || player2.health <= 0 ) {
+            determineWinner({player1, player2, timerId})
+        }
+
+    }  // ------ frame/refresh rate limiting code: closing bracket ------ //
 }
 
 animate()

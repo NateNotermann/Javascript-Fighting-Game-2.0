@@ -4,13 +4,13 @@
 Play the finished product [HERE](https://javascriptfightinggame.netlify.app/)!
 
 ### Controls: 
-Player 1  
+**Player 1**  
 Move right: D key  
 Move left: A key  
 Jump: W  
 Attack: Space Bar  
 
-Player 2  
+**Player 2**  
 Move right: Right Arrow  
  Move left: Left Arrow  
 Jump: Up Arrow  

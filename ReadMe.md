@@ -1,5 +1,8 @@
 # Javascript 2D Retro Fighting Game!
 
+
+Play the finished product [HERE](https://javascriptfightinggame.netlify.app/)
+
 This template was made by following a [YouTube Tutorial](https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses) by Chris Course. I highly recommend checking out his tutorial and other work. [YouTube Tutorial](https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses) 
 
 This app uses basic HTML, CSS and Javascript. 

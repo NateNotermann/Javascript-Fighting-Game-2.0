@@ -1,7 +1,20 @@
 # Javascript 2D Retro Fighting Game!
 
 
-Play the finished product [HERE](https://javascriptfightinggame.netlify.app/)
+Play the finished product [HERE](https://javascriptfightinggame.netlify.app/)!
+
+### Controls: 
+Player 1
+    Move right: D key
+    Move left: A key
+    Jump: W
+    Attack: Space Bar
+
+Player 2
+    Move right: Right Arrow
+    Move left: Left Arrow
+    Jump: Up Arrow
+    Attack: (left)Option button
 
 This template was made by following a [YouTube Tutorial](https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses) by Chris Course. I highly recommend checking out his tutorial and other work. [YouTube Tutorial](https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses) 
 
